@@ -9,12 +9,14 @@ use solana_program::pubkey::Pubkey;
 use solana_sdk::pubkey;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
-pub const SOLANA_RPC: &str = "https://mainnet.helius-rpc.com/?api-key=7ea98130-baee-4b31-94e3-20d9da28ddc3";
-pub const SOLANA_ACCOUNT_RPC_WS: &str = "wss://mainnet.helius-rpc.com/?api-key=7ea98130-baee-4b31-94e3-20d9da28ddc3";
+pub const SOLANA_RPC: &str =
+    "https://mainnet.helius-rpc.com/?api-key=7ea98130-baee-4b31-94e3-20d9da28ddc3";
+pub const SOLANA_ACCOUNT_RPC_WS: &str =
+    "wss://mainnet.helius-rpc.com/?api-key=7ea98130-baee-4b31-94e3-20d9da28ddc3";
 pub const SOLANA_BLOCKS_RPC_WS : &str = "wss://divine-frequent-log.solana-mainnet.quiknode.pro/9abcf81e71af059e052f4c8f9636cc7536ade363";
 
 //pub const PROGRAM_ID : Pubkey = pubkey!("KswapMzo937QtKugWqNPYcqqiN17XWnbjEqjsEfPZM8");
-pub const PROGRAM_ID : Pubkey = pubkey!("oreV2ZymfyeXgNgBdqMkumTqqAprVqgBWQfoYkrtKWQ");
+pub const PROGRAM_ID: Pubkey = pubkey!("oreV2ZymfyeXgNgBdqMkumTqqAprVqgBWQfoYkrtKWQ");
 
 #[tokio::main]
 async fn main() {
@@ -30,7 +32,7 @@ async fn main() {
     let db = sqlx::SqlitePool::connect(&db_url)
         .await
         .expect("Can not create db");
-    sqlx::migrate!("./migrations").run(&db).await.unwrap();
+    //sqlx::migrate!("./migrations").run(&db).await.unwrap();
 
     tokio::task::spawn(services::account_indexer(db.clone(), &PROGRAM_ID));
     tokio::task::spawn(services::block_tx_indexer(db.clone(), &PROGRAM_ID));

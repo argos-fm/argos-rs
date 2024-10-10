@@ -8,8 +8,10 @@ use solana_sdk::{commitment_config::CommitmentConfig, pubkey::Pubkey};
 use solana_transaction_status::TransactionDetails;
 use sqlx::{Pool, QueryBuilder, Sqlite};
 
-pub async fn block_tx_indexer(db:Pool<Sqlite>, program_id:&Pubkey) {
-    let client = PubsubClient::new(crate::SOLANA_BLOCKS_RPC_WS).await.unwrap();
+pub async fn block_tx_indexer(db: Pool<Sqlite>, program_id: &Pubkey) {
+    let client = PubsubClient::new(crate::SOLANA_BLOCKS_RPC_WS)
+        .await
+        .unwrap();
     let block_filter = RpcBlockSubscribeFilter::MentionsAccountOrProgram(program_id.to_string());
     let comitment = CommitmentConfig::confirmed();
     let block_config = RpcBlockSubscribeConfig {

@@ -1,14 +1,16 @@
 use solana_account_decoder::UiAccountEncoding;
-use solana_client::{nonblocking::rpc_client::RpcClient, rpc_config::{RpcAccountInfoConfig, RpcProgramAccountsConfig}};
+use solana_client::{
+    nonblocking::rpc_client::RpcClient,
+    rpc_config::{RpcAccountInfoConfig, RpcProgramAccountsConfig},
+};
 use solana_sdk::pubkey::Pubkey;
 use sqlx::{QueryBuilder, Sqlite, SqlitePool};
 
-
-pub async fn account_indexer(db: SqlitePool, program_id:&Pubkey) {
+pub async fn account_indexer(db: SqlitePool, program_id: &Pubkey) {
     let rpc_client = RpcClient::new(crate::SOLANA_RPC.to_string());
     let slot = rpc_client.get_slot().await.expect("faild to get slot");
     let config = RpcProgramAccountsConfig {
-        sort_results:None,
+        sort_results: None,
         filters: None,
         account_config: RpcAccountInfoConfig {
             encoding: Some(UiAccountEncoding::Base64Zstd),
@@ -42,7 +44,7 @@ pub async fn account_indexer(db: SqlitePool, program_id:&Pubkey) {
     }
 
     let sub_config = RpcProgramAccountsConfig {
-        sort_results:None,
+        sort_results: None,
         filters: None,
         account_config: RpcAccountInfoConfig {
             encoding: Some(UiAccountEncoding::Base64),
