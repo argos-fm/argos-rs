@@ -1,5 +1,3 @@
-mod argos_svm;
-
 use std::{collections::HashSet, hash::Hash, str::FromStr};
 
 use rusqlite::{Connection, OpenFlags, Result};

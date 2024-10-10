@@ -2757,6 +2757,8 @@ dependencies = [
 name = "ore-indexer"
 version = "0.1.0"
 dependencies = [
+ "bincode",
+ "bs58",
  "rusqlite",
  "solana-bpf-loader-program",
  "solana-client",
@@ -2765,6 +2767,8 @@ dependencies = [
  "solana-sdk",
  "solana-svm",
  "solana-system-program",
+ "solana-transaction-status",
+ "time",
  "tokio",
 ]
 
